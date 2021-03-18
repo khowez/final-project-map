@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>NYC Heat Vulnerability</title>
+  <!-- MapBoxGL styling -->
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+  <!-- bring in local CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+  <div class='container'>
+    <div id='sidebar'>
+      <div id='floatingBackground'>
+        <div id='floatingText'>
+          <h1>Heat Vulnerability & Race in NYC</h1>
+          <div id='callToAction'>Extreme heat causes more death and hospitalizations across the United States than any other weather event. But its effects are not evenly distributed in urban areas. In NYC, deaths from heat-related illness are strongly correlated with race. Use the map to explore how race and heat vulnerability are related.</div>
+          <div id='legend'><h2>Map Legend<h2><img id='legendpng' src='data/heat-race-legend.png' /></div>
+        </div>
+      </div>
+    </div>
+    <div id='mapContainer'>map</div>
+  </div>
+  <!-- bring in MapBoxGL -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+  <!-- bring in jQuery -->
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"></script>
+    <!-- bring in local JS -->
+  <script src="js/scripts.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+html, body, .container, #sidebar, #floatingBackground, #mapContainer {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+}
+
+#sidebar {
+  background: #985356;
+  width: 320px;
+  padding: 20px;
+}
+
+#floatingBackground {
+  background: white;
+  width: 310px;
+  opacity: 1;
+  padding: 5px;
+  color: black;
+}
+
+#floatingText {
+  width: 310px;
+  color: black;
+  font-family: georgia;
+  opacity: 1;
+  color: black;
+}
+
+h1 {
+  text-align: center;
+}
+
+#mapContainer {
+  flex-grow: 1;
+}
+
+#callToAction {
+  height: 150px;
+  text-align: justify;
+  padding: 10px;
+}
+
+#legend {
+  font-size: 14px;
+  text-align: center;
+}
+
+#legendpng {
+  height: 300px;
+}
