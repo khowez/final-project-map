@@ -4,20 +4,15 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoia2hvd2V6IiwiYSI6ImNrbDFkNXE0dTBsZWkydnBkMXB0M
 var map = new mapboxgl.Map({
     container: 'mapContainer', // container ID
     style: 'mapbox://styles/mapbox/light-v10', // style URL
-    center: [-74.006106,40.714434], // starting position [lng, lat]
-    zoom: 9.8 // starting zoom
+    center: [-74.006106,40.707434], // starting position [lng, lat]
+    zoom: 9.79 // starting zoom
 })
-
-// // add the mapbox geocoder control
-// map.addControl(
-//   new MapboxGeocoder({
-//     accessToken: mapboxgl.accessToken,
-//     mapboxgl: mapboxgl
-//   })
-// );
 
 // load the map before completing other functions
 map.on('style.load', function () {
+
+  // disable map zoom when using scroll
+  map.scrollZoom.disable();
 
 // Define a source before using it to create a new layer
   map.addSource('raceHeatDataSource', { //source name
@@ -48,7 +43,7 @@ map.on('style.load', function () {
       'fill-outline-color': '#828282',
       'fill-opacity': 0.85
       },
-    });
+    }, 'waterway-label');
 
     // add an empty data source, which we will use to highlight the geometry the user has selected
    map.addSource('highlight-feature', {
@@ -106,8 +101,8 @@ map.on('style.load', function () {
         var popupContent = `
        <div>
         <h2>${ntaName}</h2>
-        <div>Heat Vulnerability Score: ${ntaHeatScore}</div>
-        <div>Black and Latino Population: ${Math.round(ntaBlaLatPerc * 100)}%</div>
+        <p><div id='hviInfo'>Heat Vulnerability Index Score: <mark id='hviInfoHighlight'><b>${ntaHeatScore}</b></mark></div>
+        <p><div id='raceInfo'>Black and Latinx Population: <mark id='raceInfoHighlight'><b>${Math.round(ntaBlaLatPerc * 100)}%</b></mark></div>
        </div>
      `
 
@@ -119,5 +114,5 @@ map.on('style.load', function () {
       }
     })
 
-    // 
+    //
 })

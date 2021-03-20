@@ -5,27 +5,146 @@
   <meta charset="utf-8">
 
   <title>NYC Heat Vulnerability</title>
+  <!-- Bootstrap styling -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <!-- MapBoxGL styling -->
   <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
   <!-- bring in local CSS -->
   <link rel="stylesheet" href="css/styles.css">
+  <!-- bring in google font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,500;0,700;1,300&display=swap" rel="stylesheet">
+  <!-- highlight effect code -->
+  <svg xmlns="//www.w3.org/2000/svg" version="1.1" class="svg-filters" style="display:none;">
+    <defs>
+      <filter id="marker-shape">
+        <feTurbulence type="fractalNoise" baseFrequency="0 0.15" numOctaves="1" result="warp" />
+        <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="30" in="SourceGraphic" in2="warp" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- bring in font awesome -->
+  <script src="https://kit.fontawesome.com/223e95945f.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
 
-  <div class='container'>
-    <div id='sidebar'>
-      <div id='floatingBackground'>
-        <div id='floatingText'>
-          <h1>Heat Vulnerability & Race in NYC</h1>
-          <div id='callToAction'>Extreme heat causes more death and hospitalizations across the United States than any other weather event. But its effects are not evenly distributed in urban areas. In NYC, deaths from heat-related illness are strongly correlated with race. Use the map to explore how race and heat vulnerability are related.</div>
-          <div id='legend'><h2>Map Legend<h2><img id='legendpng' src='data/heat-race-legend.png' /></div>
+  <!-- About Modal -->
+  <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="aboutModalLabel">Assessing Heat Vulnerability in NYC</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <b><i>Hot weather is dangerous.</i></b> In New York City – and across the country – more people die from heat than from all other natural disasters combined. As our climate continues to warm, we expect more heat events that can put people’s lives at risk.
+          <p>
+          <p>In New York City, the risk of death from heat is unfairly distributed across neighborhoods. The city's Department of Health and Mental Hygeine has identified environmental and social factors associated with increased risk to create a <b>Heat Vulnerability Index</b>.
+          <p>These factors include:
+            <ul id='hviRiskFactors'>
+              <li>Surface temperature</li>
+              <li>Green space</li>
+              <li>Access to home air conditioning</l1>
+              <li>Income</li>
+              <li>Race and Ethniity</li>
+            </ul>
+
+          <p>The goal of this analysis is to identify neighborhoods at highest risk and help inform neighborhood-level policies and programs that can protect people - sending resources to where they're needed the most.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- HVI Modal -->
+  <div class="modal fade" id="hviModal" tabindex="-1" aria-labelledby="hviModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="hviModalLabel">About the Heat Vulnerability Index</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          The Heat Vulnerability Index shows neighborhoods whose residents are more at risk for dying during and immediately following extreme heat.  It uses a statistical model to summarize the most important social and environmental factors that contribute to neighborhood heat risk. The factors included in the HVI are surface temperature, green space, access to home air conditioning, and the percentage of residents who are low-income or non-Latinx Black. Differences in these risk factors across neighborhoods are rooted in past and present racism.
+          <p>
+          <p><b>Neighborhoods are scored from  <mark id=hviLowScore><i>1 (lowest risk)</i></mark> to  <mark id='hviHighScore'><i>5 (highest risk)</i></mark>.</b>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Race Modal -->
+  <div class="modal fade" id="raceModal" tabindex="-1" aria-labelledby="raceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="raceModalLabel">Racial Disparities in Heat Vulnerability</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          In NYC, <b><i>Black people die of heat-related illness at a disproportionately high rate.</b></i> Because of this, neighborhoods with more Black residents are more greatly impacted by extreme heat.
+          <p>
+          <p>Black New Yorkers suffer these disproportionate health impacts from heat due to social and economic disparities. These disparities stem from structural racism, which includes neighborhood disinvestment, racist housing policies, fewer job opportunities and lower pay, and less access to high-quality education and health care.
+          <p>
+          <p>Overall, these systems limit access to resources that protect health. While many factors affect a neighborhood’s heat risk, Black New Yorkers are subjected to higher rates of poverty and lower access to air conditioning, green space, and neighborhood cooling resources.
+          <p><img src="data/heatstressdeath_nyc.png" id="heatStressChart"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- add navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><h1><b>Heat Vulnerability & Race in NYC</b></h1></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <!-- Button trigger modal -->
+            <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About<i class="fas fa-info-circle"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class='container'>
+    <div id='sidebar'>
+      <h2 id='subtitle'><i>Extreme heat is the deadliest </h2>
+      <h2 id='subtitle2'>weather phenomenon worldwide   </i></h2>
+      <!-- add instructions for using the map -->
+      <div id='callToAction'>
+        <h3><b>Using This Map:</b></h3>
+        <div>Click on each neighborhood to learn its
+          <!-- add model w/ info on HVI -->
+          <br><mark id='hviHighlight'>Heat Vulnerability Index Score</mark><a  aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#hviModal"><i class="fas fa-info-circle"></i></a>
+          and the percentage of its population that identifies as
+          <!-- add modal w/ info on racialized risk of heat exposure -->
+          <mark id='raceHighlight'>Black and/or Latinx</mark><a  aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#raceModal"><i class="fas fa-info-circle"></i></a>
+        </div>
+      </div>
+      <!-- add a legend for the map bivariate colorscheme -->
+      <div id='legend'><img id='legendpng' src='data/heat-race-legend.png' /></div>
+    </div>
     <div id='mapContainer'>map</div>
   </div>
+
+  <!-- bring in Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
   <!-- bring in MapBoxGL -->
   <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
   <!-- bring in jQuery -->
