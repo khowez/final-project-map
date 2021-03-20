@@ -96,6 +96,7 @@
           <p>
           <p>Overall, these systems limit access to resources that protect health. While many factors affect a neighborhood’s heat risk, Black New Yorkers are subjected to higher rates of poverty and lower access to air conditioning, green space, and neighborhood cooling resources.
           <p><img src="data/heatstressdeath_nyc.png" id="heatStressChart"/>
+            <div id='imageCaption'>Source: New York City Department of Health and Mental Hygiene</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -105,7 +106,7 @@
   </div>
 
   <!-- add navigation bar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav id='navbar' class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><h1><b>Heat Vulnerability & Race in NYC</b></h1></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,10 +123,10 @@
     </div>
   </nav>
 
-  <div class='container'>
+  <div class='main-container'>
     <div id='sidebar'>
-      <h2 id='subtitle'><i>Extreme heat is the deadliest </h2>
-      <h2 id='subtitle2'>weather phenomenon worldwide   </i></h2>
+      <h2 id='subtitle'><i>Extreme heat is the deadliest</h2>
+      <h2 id='subtitle2'>weather phenomenon worldwide</i></h2>
       <!-- add instructions for using the map -->
       <div id='callToAction'>
         <h3><b>Using This Map:</b></h3>
@@ -138,7 +139,10 @@
         </div>
       </div>
       <!-- add a legend for the map bivariate colorscheme -->
-      <div id='legend'><img id='legendpng' src='data/heat-race-legend.png' /></div>
+      <p>The legend below shows how both variables intersect on the map.
+      <div id='legend'>
+        <img id='legendpng' src='data/heat-race-legend.png' />
+      </div>
     </div>
     <div id='mapContainer'>map</div>
   </div>
